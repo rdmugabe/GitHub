@@ -1,0 +1,93 @@
+<html>
+<head>
+<title>Richard</title>
+
+<link rel="stylesheet" type="text/css" href="/richard/css/styles.css">
+
+</head>
+<link rel="shortcut icon" type="image/x-icon" href="/richard/css/icon.jpg" />`
+<body>
+<h1>Welcome to Richard's World</h1>
+<p>
+	<img border="0" src="/richard/images/icon.jpg" alt="icon" width="445" height="300">	
+</p>
+<form action="http://google.com">
+    <input type="submit" value="Go to Google">
+</form>
+	<?php
+            // Sources:
+            //     o http://www.pontikis.net/blog/how-to-use-php-improved-mysqli-extension-and-why-you-should
+            //     o http://www.php.net/manual/en/book.mysqli.php
+            
+            // See if there is form data submitted
+            if (! array_key_exists('pop', $_REQUEST)) {
+                // Put up a form to get a population number 
+        ?>
+                <form action="world.php" method="get">
+                    <label> Population:
+                        <input type="number" name="pop" min="100000" max="2000000000" step="100000" value="100000000" required placeholder="Min Population">
+                    </label>
+                    <input type="submit" value="Go">
+                </form>
+        <?php
+            }
+            else {
+                // This is a form submission with population data input "pop"
+                // Display the data
+                
+                // Connect to the world database on this host
+                define("DB_HOST", "localhost");
+                define("DB_USER", "web");
+                define("DB_PASS", "SECRET");
+                define("DB_NAME", "world");
+                define("DB_UNIX_SOCKET", "/var/run/mysqld/mysqld.sock");  // from phpinfo()
+                define("DB_PORT", 3306);
+                $db = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME, DB_PORT, DB_UNIX_SOCKET);
+                if ($db->connect_errno) {
+                    // The database connection failed.
+                    die('Unable to connect to database [' . $db->connect_error . ']');
+                }
+       
+                // Find all the countries with populations at least the population specified
+                $pop = intval($_REQUEST['pop']);  // The population entered
+                
+                if (!$stmt = $db->prepare("SELECT Name, Population FROM Country
+                                           WHERE Population >= ? ORDER BY Population DESC")) {
+                    die("Prepare failed");
+                }
+                else if (!$stmt->bind_param("i", $pop)) {
+                    die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
+                }
+                else if (!$stmt->execute()) {
+                    die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
+                }
+            ?>
+<p>Iisque veritus signiferumque at sed. Nam et erant incorrupte. Aeterno prompta ne has, ut usu stet erat. Vis ex audiam fabulas pericula, no diceret inermis splendide cum, vidisse detraxit gloriatur an mel. Tation oblique definiebas vel ei, ludus tamquam ius ut. Ea mollis iuvaret efficiantur has.
+
+Rebum errem ullamcorper his ei, ei magna ceteros efficiantur est. Dicta accumsan consectetuer vix ex, eum laudem philosophia an, mea an soluta alterum percipit. Nisl diceret consectetuer eos no, ea decore latine duo. Cu ius duis natum mnesarchum, an sed dicant albucius.
+
+Mei vidisse fastidii ex, ex iudicabit mnesarchum eum. Mel omittam expetenda honestatis et, vis nemore nominavi eu. Duo te simul postulant maiestatis. Ex wisi forensibus cum, his ne nostrum quaerendum. Sed ei placerat constituto.
+
+Est tation insolens ex, mel iusto causae et, equidem torquatos an qui. Quo alii aliquam voluptua no, ex mea nullam splendide reprehendunt, an commodo nominati pri. His id omnis sonet, electram contentiones ad per. Quidam dolorum detraxit usu et, cu mea dicit abhorreant consetetur. Etiam saepe appellantur ut usu, odio admodum qualisque mea ei.
+
+Putant maiorum electram cu sit, quo enim idque ea, et nemore timeam iracundia cum. Pro diam erant vulputate ad, ea ius labore suavitate. Facer consetetur omittantur ei est. Inani clita euismod sea te, eum soleat iudicabit disputando no. Ut consul nominati pericula vim, his in eros solum insolens. Ad diam latine labores his. Nostrud admodum eos no.
+
+Ei eam stet expetenda. Cum te justo nihil dissentiunt, ex doming volumus mentitum pro. Ius an simul dolorem voluptua. An vel causae tincidunt, no omnium aeterno ius, an qui nulla elitr. Utinam definitionem nam te.
+
+Mel an facete dolorem, ad ubique integre interesset eum. Choro oratio consequat quo cu, nec harum vidisse ea. No autem nulla his, ne iusto efficiantur ius. Nec in elit mutat delicata. Sit at altera blandit, cetero percipitur mei ei.
+
+Et vix veri molestie, in lorem persius pro. No augue voluptua cum. Ridens nusquam quaerendum sit ut. Vel an audire repudiandae, vis ex oratio definitiones. Sea ipsum sententiae ei. Commune iudicabit ei vel, omnis iriure tractatos cu eos.
+
+Mea ponderum evertitur ad. Cu mei enim sint sententiae, ea vim eruditi explicari definitionem. Nostro erroribus incorrupte has at, ei delectus legendos euripidis eum, mel ad zril option eleifend. Vis prima dicat ex, et inani commodo phaedrum quo, vix ne veniam dissentiet.
+
+Ridens discere pericula sit no, qui homero deleniti ei, ei vix habeo aeque possit. Vix quod tempor interesset an, cibo omnium his in. At facilisis patrioque inciderint sit. Graeci fierent expetendis mel in, tibique delectus his at.
+      .</p>
+
+<p>Lorem ipsum dolor sit amet, elitr mentitum sit no. Autem repudiare ex eos, pro id maiorum expetendis, an qui vivendum liberavisse. Ad accumsan mandamus sed, mea latine integre ut. Timeam propriae repudiandae est ut, cum ea minim conceptam omittantur.
+</p>
+
+<p>Lorem ipsum dolor sit amet, quo in homero tamquam vivendum. Mei ea nominavi mediocritatem, eu brute ceteros cum, facer dicam vidisse ad cum. Sit soluta theophrastus comprehensam an, an duo wisi tantas. Essent fabellas eam no, ex est vero persius inciderint. Pro utamur aliquam definitiones ad, quo prompta signiferumque eu.
+<b>.htm</b> or <b>.html</b>, dCu vel torquatos conceptam dissentiet. Ea per populo pertinacia, omnis nostrud ancillae eu ius. In cetero latine labores vix. Cu erant deterruisset duo.</p>
+
+</body>
+</html>
