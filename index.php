@@ -3,17 +3,23 @@
 <title>Richard</title>
 
 <link rel="stylesheet" type="text/css" href="/richard/css/styles.css">
-
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript" src="/richard/js/javascript.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
 </head>
 <link rel="shortcut icon" type="image/x-icon" href="/richard/css/icon.jpg" />`
 <body>
-<h1>Welcome to Richard's World</h1>
-<p>
-	<img border="0" src="/richard/images/icon.jpg" alt="icon" width="445" height="300">	
-</p>
-<form action="http://google.com">
-    <input type="submit" value="Go to Google">
-</form>
+        <div class="rmm">
+            <ul>
+                <li><a href='/richard/index.php'>Home</a></li>
+                <li><a href='#about-me'>About me</a></li>
+                <li><a href='#gallery'>Gallery</a></li>
+                <li><a href='#blog'>Blog</a></li>
+                <li><a href='#links'>Links</a></li>
+                <li><a href='#sitemap'>Sitemap</a></li> 
+            </ul>
+        
+
 	<?php
             // Sources:
             //     o http://www.pontikis.net/blog/how-to-use-php-improved-mysqli-extension-and-why-you-should
@@ -24,11 +30,13 @@
                 // Put up a form to get a population number 
         ?>
                 <form action="index.php" method="get">
-                    <label> all:
-                        <input type="number" name="pop" min="100000" max="2000000000" step="100000" value="100000000" required placeholder="Min Population">
-                    </label>
-                    <input type="submit" value="Go">
+                    
+                    <input type="submit" name="pop" value="Select all">
                 </form>
+		<div class="container">
+			<a href="http://www.richardmgb.comeze.com/richard/login.php" class="button">Login</a>
+			<a href="http://www.richardmgb.comeze.com/richard/index2.html" class="button">Register</a>
+		</div>
         <?php
             }
             else {
@@ -49,20 +57,17 @@
                 }
        
                 // Find all the countries with populations at least the population specified
-                $pop = intval($_REQUEST['pop']);  // The population entered
+                //$pop = intval($_REQUEST['pop']);  // The population entered
                 
-                if (!$stmt = $db->prepare("SELECT firstName, lastName FROM example
-					  where 0 <= ?")) {
+                if (!$stmt = $db->prepare("SELECT firstName, lastName FROM example")) {
                     die("Prepare failed");
                 }
-		else if (!$stmt->bind_param("i", $pop)) {
-                    die("Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error);
-                }
+		
                 else if (!$stmt->execute()) {
                     die("Execute failed: (" . $stmt->errno . ") " . $stmt->error);
                 }
 		?>
-		<table>
+		<table class="center">
                 <caption>
                     All Names
                 </caption>
@@ -86,5 +91,6 @@
         <?php
             }
         ?>
+	</div>
 </body>
 </html>
